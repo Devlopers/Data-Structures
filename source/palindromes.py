@@ -2,6 +2,7 @@
 
 # Hint: use string.ascii_letters (all letters in ASCII character set)
 import string
+import re
 
 
 def is_palindrome(text):
@@ -10,22 +11,47 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str)
-    return is_palindrome_iterative(text)
-    # return is_palindrome_recursive(text)
+    # return is_palindrome_iterative(text)
+    return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
     # TODO: implement the is_palindrome function iteratively here
-    pass
+    text = re.sub('[^0-9a-zA-Z]+', '', text.lower())
+    if text == text[::-1]:
+        return True
+    return False
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
 
 
 def is_palindrome_recursive(text, left=None, right=None):
     # TODO: implement the is_palindrome function recursively here
-    pass
+    if left is None and right is None:
+        text = re.sub('[^0-9a-zA-Z]+', '', text.lower())
+        left = 0
+        right = len(text) - 1
+    else:
+        left = left + 1
+        right = right - 1
+    if left >= right:
+        return True
+    elif text[left] == text[right]:
+        return is_palindrome_recursive(text, left, right)
+    else:
+        return False
     # once implemented, change is_palindrome to call is_palindrome_recursive
     # to verify that your iterative implementation passes all tests
+
+
+def is_permutation_palindrome_iterative(text):
+    # TODO: implement the is_permutation_palindrome iteratively
+    pass
+
+
+def is_permutation_palindrome_recursive(text):
+    # TODO: implement the is_permutation_palindrome recursively
+    pass
 
 
 def main():
