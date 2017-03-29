@@ -72,19 +72,45 @@ class LinkedList(object):
         """Return the item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size"""
         # Check if the given index is out of range and if so raise an error
+        steps = 0
+        curr_node = self.head
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node at the given index and return the node's data
+        while steps <= index:
+            if steps == index:
+                return curr_node.data
+            curr_node = curr_node.next
+            steps += 1
+
+
 
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size"""
+        new_node = Node(item)
+        steps = 0
+        curr_node = self.head
+        last_node = None
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert the item after
+        if index == 0:
+            self.prepend(item)
+        elif index == self.size:
+            self.append(item)
+        else:
+            while steps <= index:
+                if steps == index:
+                    self.size += 1
+                    last_node.next = new_node
+                    new_node.next = curr_node
+                last_node = curr_node
+                curr_node = curr_node.next
+                steps += 1
 
     def append(self, item):
+        self.size += 1
         """Insert the given item at the tail of this linked list"""
         # Create a new node to hold the given item
         new_node = Node(item)
@@ -99,6 +125,7 @@ class LinkedList(object):
         self.tail = new_node
 
     def prepend(self, item):
+        self.size += 1
         """Insert the given item at the head of this linked list"""
         # Create a new node to hold the given item
         new_node = Node(item)
@@ -113,6 +140,7 @@ class LinkedList(object):
         self.head = new_node
 
     def delete(self, item):
+        self.size -= 1
         """Delete the given item from this linked list, or raise ValueError"""
         # Start at the head node
         current = self.head
