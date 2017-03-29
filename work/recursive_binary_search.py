@@ -1,9 +1,13 @@
 import sys
+import math
 
 
-def recursive_binary_search(input_list, target, iterations=1, curr_index=0):
+def recursive_binary_search(input_list, target, iterations=0, curr_index=0):
     # print(input_list, target, iterations, curr_index)
     iterations += 1
+    # if curr_index is None:
+    #     curr_index = len(input_list)//2
+    print("Iterations: ", iterations, math.ceil(len(input_list)/(2**iterations)), " curr_index: ", curr_index)
     if curr_index >= len(input_list) or iterations > len(input_list):
         print("Target not found.")
         return None
@@ -14,17 +18,17 @@ def recursive_binary_search(input_list, target, iterations=1, curr_index=0):
     else:
         # print("Step:", len(input_list)//iterations)
         if input_list[curr_index] < target:
-            # print("Less than target.")
-            new_index = curr_index + (len(input_list) - 1)//iterations
-            # print(new_index)
+            print("Less than target.")
+            new_index = curr_index + math.ceil(len(input_list)/(2**iterations))
+            print(new_index)
             # print(input_list[new_index])
-            recursive_binary_search(input_list, target, iterations, new_index)
+            return recursive_binary_search(input_list, target, iterations, new_index)
         else:
-            # print("Greater than target.")
-            new_index = curr_index - (len(input_list) - 1)//iterations
-            # print(new_index)
+            print("Greater than target.")
+            new_index = curr_index - math.ceil(len(input_list)/(2**iterations))
+            print(new_index)
             # print(input_list[new_index])
-            recursive_binary_search(input_list, target, iterations, new_index)
+            return recursive_binary_search(input_list, target, iterations, new_index)
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ def recursive_linear_search(input_list, target, index=0):
             print(index)
             return index
         else:
-            recursive_linear_search(input_list, target, index+1)
+            return recursive_linear_search(input_list, target, index+1)
 
 
 if __name__ == '__main__':
