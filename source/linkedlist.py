@@ -82,8 +82,6 @@ class LinkedList(object):
             curr_node = curr_node.next
             steps += 1
 
-
-
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size"""
@@ -110,8 +108,9 @@ class LinkedList(object):
                 steps += 1
 
     def append(self, item):
-        self.size += 1
         """Insert the given item at the tail of this linked list"""
+        # Increment the self.size when adding new item to linkedlist
+        self.size += 1
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -125,8 +124,9 @@ class LinkedList(object):
         self.tail = new_node
 
     def prepend(self, item):
-        self.size += 1
         """Insert the given item at the head of this linked list"""
+        # Increment the self.size when adding new item to linkedlist
+        self.size += 1
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -140,7 +140,6 @@ class LinkedList(object):
         self.head = new_node
 
     def delete(self, item):
-        self.size -= 1
         """Delete the given item from this linked list, or raise ValueError"""
         # Start at the head node
         current = self.head
@@ -160,6 +159,8 @@ class LinkedList(object):
                 current = current.next
         # Check if we found the given item or we never did and reached the tail
         if found:
+            # Decerement size if node found for deletion
+            self.size -= 1
             # Check if we found a node in the middle of this linked list
             if current is not self.head and current is not self.tail:
                 # Update the previous node to skip around the found node
