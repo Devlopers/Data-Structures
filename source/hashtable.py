@@ -26,7 +26,7 @@ class HashTable(object):
     def load_factor(self):
         """Return the load factor, the ratio of number of entries to buckets"""
         # TODO: Calculate load factor
-        # return ...
+        return self.size / float(len(self.buckets))
 
     def _resize(self, new_size=None):
         """Resize this hash table's buckets and rehash all key-value entries.
@@ -39,12 +39,15 @@ class HashTable(object):
         elif new_size is 0:
             new_size = self.size / 2  # Half size
         # TODO: Get a list to temporarily hold all current key-value entries
-        # ...
+        temp_list = self.items()
+        print(temp_list)
         # TODO: Create a new list of new_size total empty linked list buckets
-        # ...
+        self.buckets = [LinkedList() for i in range(new_size)]
+        self.size = 0
         # TODO: Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
-        # ...
+        for key, value in temp_list:
+            self.set(key, value)
 
     def keys(self):
         """Return a list of all keys in this hash table"""
@@ -118,12 +121,15 @@ class HashTable(object):
             # In this case, the given key's value is being updated
             # Remove the old key-value entry from the bucket first
             bucket.delete(entry)
+        else:
+            self.size += 1
         # Insert the new key-value entry into the bucket in either case
         bucket.append((key, value))
         # TODO: Check if the load factor exceeds a threshold such as 0.75
-        # ...
-        # TODO: If so, automatically resize to reduce the load factor
-        # ...
+        if self.load_factor() > 0.75:
+            # TODO: If so, automatically resize to reduce the load factor
+            print('Load factor > 0.75')
+            self._resize()
 
     def delete(self, key):
         """Delete the given key and its associated value, or raise KeyError"""
@@ -134,6 +140,7 @@ class HashTable(object):
         entry = bucket.find(lambda (k, v): k == key)
         if entry is not None:  # Found
             # Remove the key-value entry from the bucket
+            self.size -= 1
             bucket.delete(entry)
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
