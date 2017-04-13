@@ -25,6 +25,10 @@
 
 ### [Class 9](Class9.md): Friday, April 7 – Tree Traversals
 
+### [Class 10](Class10.md): Monday, April 10 – Iterative Sorting Algorithms
+
+### [Class 11](Class11.md): Wednesday, April 12 – Divide-and-Conquer Recursion
+
 
 ## Working with this GitHub repository
 
