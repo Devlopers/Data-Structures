@@ -40,7 +40,6 @@ class HashTable(object):
             new_size = self.size / 2  # Half size
         # TODO: Get a list to temporarily hold all current key-value entries
         temp_list = self.items()
-        print(temp_list)
         # TODO: Create a new list of new_size total empty linked list buckets
         self.buckets = [LinkedList() for i in range(new_size)]
         self.size = 0

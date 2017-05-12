@@ -34,6 +34,15 @@ def insertion_sort(orig_list):
     return source
 
 
+def insertion_sort_with_binary_search(orig_list):
+    source = orig_list
+    for index in range(1, len(source)):
+        current_value = source[index]
+        insertion_index = binary_search(source, current_value)
+        source[insertion_index] = current_value
+    return source
+
+
 def tree_sort(orig_list):
     source = orig_list
     sort_tree = BinarySearchTree()
@@ -56,5 +65,6 @@ if __name__ == '__main__':
     # sorter = bubble_sort
     # sorter = selection_sort
     # sorter = insertion_sort
+    # sorter = insertion_sort_with_binary_search
     sorter = tree_sort
     test_sort(sorter)
